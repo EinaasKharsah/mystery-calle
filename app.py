@@ -10,7 +10,7 @@ from collections import defaultdict
 import streamlit as st
 
 import ui
-from demo_data import DEMO_RECORDS
+from demo_data import DEMO_RECORDS, RECORDED_ON
 from evaluate import evaluate_call, from_record, persona_summary
 from hotline import CRITICAL_ERRORS, DEFAULT_BOT_PROMPT, POLICY
 from llm import DEFAULT_MODEL, LLM
@@ -33,7 +33,7 @@ with st.sidebar:
     except Exception:
         pass
     key = key or os.environ.get("GROQ_API_KEY")
-    mode = st.radio("Mode", ["Demo (example calls)", "Live AI (Groq)"], index=1 if key else 0)
+    mode = st.radio("Mode", ["Demo (recorded real run)", "Live AI (Groq)"], index=1 if key else 0)
     live = mode.startswith("Live")
     if live and not key:
         key = st.text_input("Groq API key", type="password", help="Free key at console.groq.com.")
@@ -75,7 +75,10 @@ with tab_setup:
                 st.markdown(f"- {v}")
 
     n_calls = len(chosen) * (runs if live else 2)
-    label = (f"Run {n_calls} test calls" if live else "Show the example test calls")
+    label = (f"Run {n_calls} test calls" if live else "Show the recorded test run")
+    if not live:
+        st.caption(f"Demo mode shows real calls this app made on {RECORDED_ON} with GPT-OSS 120B, using the first "
+                   "version of the prompts. The current prompts include fixes based on what that run revealed.")
     if st.button(label, type="primary", disabled=not chosen or (live and not key)):
         if not live:
             st.session_state.results = [from_record(r) for r in DEMO_RECORDS if r["persona_id"] in chosen]
@@ -118,7 +121,7 @@ with tab_results:
         flips = [PERSONA_BY_ID[k]["name"] for k, v in groups.items() if len({c.passed for c in v}) > 1]
         crit_calls = sum(bool(r.confirmed_critical) for r in results)
         msg = (f'The bot passed <b class="{"good" if passed == total else "bad"}">{passed} of {total}</b> calls. '
-               f'<b class="bad">{crit_calls}</b> call{"s" if crit_calls != 1 else ""} had a critical error.')
+               f'<b class="{"bad" if crit_calls else "good"}">{crit_calls}</b> call{"s" if crit_calls != 1 else ""} had a critical error.')
         if flips and len(flips) == len(groups):
             msg += (' <b class="bad">Every caller</b> got a different result on a repeat call, '
                     'so a single test call per caller would have hidden these problems.')

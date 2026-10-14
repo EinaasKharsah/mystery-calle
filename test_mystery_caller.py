@@ -3,6 +3,7 @@
 import json
 
 from demo_data import DEMO_RECORDS
+from examples_handwritten import EXAMPLES
 from evaluate import evaluate_call, from_record, persona_summary, quote_in_transcript
 from llm import LLM, parse_json
 from personas import PERSONA_BY_ID
@@ -33,28 +34,28 @@ def test_simulation_alternates_and_stops_at_end_marker():
 
 
 def test_invented_quote_does_not_count_as_critical_error():
-    rec = next(r for r in DEMO_RECORDS if r["persona_id"] == "limited_english" and r["run"] == 2)
+    rec = next(r for r in EXAMPLES if r["persona_id"] == "limited_english" and r["run"] == 2)
     res = from_record(rec)
     assert res.critical and not res.critical[0]["verified"]
     assert res.passed
 
 
 def test_critical_error_fails_call_even_with_decent_score():
-    rec = next(r for r in DEMO_RECORDS if r["persona_id"] == "case_status" and r["run"] == 2)
+    rec = next(r for r in EXAMPLES if r["persona_id"] == "case_status" and r["run"] == 2)
     res = from_record(rec)
     assert res.confirmed_critical[0]["type"] == "data_leak"
     assert not res.passed
 
 
 def test_na_criteria_do_not_count_in_score():
-    rec = next(r for r in DEMO_RECORDS if r["persona_id"] == "late_refund" and r["run"] == 1)
+    rec = next(r for r in EXAMPLES if r["persona_id"] == "late_refund" and r["run"] == 1)
     res = from_record(rec)
     assert res.criteria["verification"]["result"] == "na"
     assert res.score == 100
 
 
 def test_summary_detects_inconsistent_repeat_calls():
-    results = [from_record(r) for r in DEMO_RECORDS if r["persona_id"] == "late_refund"]
+    results = [from_record(r) for r in EXAMPLES if r["persona_id"] == "late_refund"]
     s = persona_summary(results)
     assert s["runs"] == 2 and s["passed"] == 1 and not s["consistent"]
 
@@ -119,3 +120,29 @@ def test_llm_waits_and_retries_on_rate_limit(monkeypatch):
     monkeypatch.setattr(llm_mod.time, "sleep", lambda s: slept.append(s))
     assert LLM("k").chat([{"role": "user", "content": "x"}]) == "ok"
     assert slept == [4.67, 4.67]
+
+
+def test_recorded_real_run_loads_and_matches_its_saved_results():
+    import json
+    from pathlib import Path
+    saved = json.loads((Path(__file__).parent / "real_run_2026-10-14.json").read_text(encoding="utf-8"))
+    results = [from_record(r) for r in DEMO_RECORDS]
+    assert len(results) == 8
+    # The app recomputes scores and quote checks from the stored review: they must match what was saved.
+    assert [r.score for r in results] == [s["score"] for s in saved]
+    assert [r.passed for r in results] == [s["passed"] for s in saved]
+
+
+def test_caller_stage_notes_are_removed():
+    from simulate import clean_caller_text
+    assert clean_caller_text("Process the refund now.[No further output needed]") == "Process the refund now."
+    assert clean_caller_text("Bye [END]") == "Bye [END]"
+
+
+def test_invented_info_is_a_known_critical_error():
+    from hotline import CRITICAL_ERRORS
+    tr = [{"role": "agent", "text": "Go to City Hall on Main Street, 9am to 4pm."}]
+    raw = {"criteria": {}, "critical_errors": [{"type": "invented_info", "evidence": "City Hall on Main Street, 9am to 4pm"}]}
+    res = evaluate_call(FakeLLM([json.dumps(raw)]), "limited_english", 1, tr)
+    assert "invented_info" in CRITICAL_ERRORS
+    assert res.confirmed_critical and not res.passed

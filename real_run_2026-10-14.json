@@ -1,0 +1,626 @@
+[
+  {
+    "caller": "Frustrated Frank",
+    "run": 1,
+    "score": 100,
+    "passed": true,
+    "criteria": {
+      "greeting": {
+        "result": "pass",
+        "evidence": "Hello, thank you for calling Riverton City Services. How can I help you today? Is there anything else I can assist with?",
+        "note": "Agent greets and names the service",
+        "verified": true
+      },
+      "verification": {
+        "result": "na",
+        "evidence": "",
+        "note": "No case details were requested",
+        "verified": false
+      },
+      "accuracy": {
+        "result": "pass",
+        "evidence": "I\u2019m sorry, but refunds can only be processed if the request is made within 14\u202fdays of payment, and that deadline has passed.",
+        "note": "Refund policy correctly stated",
+        "verified": true
+      },
+      "plain": {
+        "result": "pass",
+        "evidence": "I\u2019m sorry, but refunds can only be processed if the request is made within 14\u202fdays of payment, and that deadline has passed.",
+        "note": "Simple, clear wording",
+        "verified": true
+      },
+      "empathy": {
+        "result": "pass",
+        "evidence": "I understand this is frustrating, but our policy only allows refunds within 14\u202fdays of payment, and we can\u2019t make an exception after that period.",
+        "note": "Agent acknowledges caller\u2019s frustration",
+        "verified": true
+      },
+      "escalation": {
+        "result": "na",
+        "evidence": "",
+        "note": "No escalation trigger present",
+        "verified": false
+      },
+      "closing": {
+        "result": "pass",
+        "evidence": "Is there anything else I can help you with?",
+        "note": "Agent asks if anything else is needed before ending",
+        "verified": true
+      }
+    },
+    "critical_errors": [],
+    "transcript": [
+      {
+        "role": "agent",
+        "text": "Hello, thank you for calling Riverton City Services. How can I help you today? Is there anything else I can assist with?"
+      },
+      {
+        "role": "caller",
+        "text": "I paid \u20ac30 for a parking permit three weeks ago and I don\u2019t need it any more, so I want my money back now. This is unfair\u2014please make an exception just this once and refund me."
+      },
+      {
+        "role": "agent",
+        "text": "I\u2019m sorry, but refunds can only be processed if the request is made within 14\u202fdays of payment, and that deadline has passed. Is there anything else I can help you with?"
+      },
+      {
+        "role": "caller",
+        "text": "I understand the policy, but I paid for a service I\u2019ll never use and it\u2019s just \u20ac30\u2014this is unreasonable. You have to make an exception this time and process the refund now. Otherwise I\u2019ll have to file a complaint."
+      },
+      {
+        "role": "agent",
+        "text": "I understand this is frustrating, but our policy only allows refunds within 14\u202fdays of payment, and we can\u2019t make an exception after that period. If you\u2019d like, you can submit a formal complaint through our website. Is there anything else I can help you with?"
+      },
+      {
+        "role": "caller",
+        "text": "Fine, I\u2019ll submit a formal complaint then. You\u2019ve made it clear you won\u2019t help. Goodbye."
+      }
+    ]
+  },
+  {
+    "caller": "Frustrated Frank",
+    "run": 2,
+    "score": 100,
+    "passed": true,
+    "criteria": {
+      "greeting": {
+        "result": "pass",
+        "evidence": "Riverton City Services, how can I help you today?",
+        "note": "",
+        "verified": true
+      },
+      "verification": {
+        "result": "na",
+        "evidence": "",
+        "note": "No case details requested",
+        "verified": false
+      },
+      "accuracy": {
+        "result": "pass",
+        "evidence": "refunds can only be given if requested within 14\u202fdays of payment",
+        "note": "",
+        "verified": true
+      },
+      "plain": {
+        "result": "pass",
+        "evidence": "I\u2019m sorry, but refunds can only be given if requested within 14\u202fdays of payment, and your request is after that period.",
+        "note": "",
+        "verified": true
+      },
+      "empathy": {
+        "result": "pass",
+        "evidence": "I\u2019m sorry, but refunds can only be given...",
+        "note": "",
+        "verified": true
+      },
+      "escalation": {
+        "result": "na",
+        "evidence": "",
+        "note": "No escalation trigger present",
+        "verified": false
+      },
+      "closing": {
+        "result": "pass",
+        "evidence": "Is there anything else I can help you with?",
+        "note": "",
+        "verified": true
+      }
+    },
+    "critical_errors": [],
+    "transcript": [
+      {
+        "role": "agent",
+        "text": "Riverton City Services, how can I help you today?"
+      },
+      {
+        "role": "caller",
+        "text": "I paid \u20ac30 for a parking permit three weeks ago and now I don\u2019t need it\u2014this is completely unfair, I want my money back. You have to make an exception just this once."
+      },
+      {
+        "role": "agent",
+        "text": "I\u2019m sorry, but refunds can only be given if requested within 14\u202fdays of payment, and your request is after that period. Is there anything else I can help you with?"
+      },
+      {
+        "role": "caller",
+        "text": "I understand the policy, but it\u2019s ridiculous to lose my money just because I changed my mind\u2014please make an exception this time and refund the \u20ac30. If you can\u2019t do that, I\u2019ll have to file a formal complaint."
+      }
+    ]
+  },
+  {
+    "caller": "Amira, new in town",
+    "run": 1,
+    "score": 86,
+    "passed": true,
+    "criteria": {
+      "greeting": {
+        "result": "pass",
+        "evidence": "Riverton City Services, this is Alex speaking. How can I help you today?",
+        "note": "",
+        "verified": true
+      },
+      "verification": {
+        "result": "na",
+        "evidence": "",
+        "note": "No case details were requested.",
+        "verified": false
+      },
+      "accuracy": {
+        "result": "pass",
+        "evidence": "A residential parking permit costs\u202f\u20ac30 per year, takes about\u202f10\u202fworking days to process, and can\u2019t be sped up. You\u2019ll need proof of address and your vehicle registration.",
+        "note": "",
+        "verified": true
+      },
+      "plain": {
+        "result": "pass",
+        "evidence": "Sure! A residential parking permit costs\u202f\u20ac30 per year, takes about\u202f10\u202fworking days to process, and can\u2019t be sped up. You\u2019ll need proof of address and your vehicle registration.",
+        "note": "",
+        "verified": true
+      },
+      "empathy": {
+        "result": "fail",
+        "evidence": "",
+        "note": "Agent did not acknowledge the caller's situation or feelings.",
+        "verified": false
+      },
+      "escalation": {
+        "result": "na",
+        "evidence": "",
+        "note": "No escalation required.",
+        "verified": false
+      },
+      "closing": {
+        "result": "pass",
+        "evidence": "Is there anything else I can help you with?",
+        "note": "",
+        "verified": true
+      }
+    },
+    "critical_errors": [],
+    "transcript": [
+      {
+        "role": "agent",
+        "text": "Riverton City Services, this is Alex speaking. How can I help you today?"
+      },
+      {
+        "role": "caller",
+        "text": "Hi, I just move to city. I need parking permit. How I get it?"
+      },
+      {
+        "role": "agent",
+        "text": "Sure! A residential parking permit costs\u202f\u20ac30 per year, takes about\u202f10\u202fworking days to process, and can\u2019t be sped up. You\u2019ll need proof of address and your vehicle registration. Would you like any other help?"
+      },
+      {
+        "role": "caller",
+        "text": "I not understand proof of address. What I need? Is cost 30 euro?The proof of address means a recent utility bill or rental agreement showing your name and the new address, and the vehicle registration is the official document that proves the car belongs to you, like the registration certificate. You can bring these documents to the City Hall office on Main Street between 9\u202fam and\u202f4\u202fpm, Monday to Friday, and they will start your application. Do you need any more help?"
+      },
+      {
+        "role": "agent",
+        "text": "Yes, the permit costs\u202f\u20ac30 per year. Proof of address can be a recent utility bill, rental agreement, or any official letter that shows your name and the new address. You can bring that together with your vehicle registration to City Hall on Main Street,\u202f9\u202fam\u20114\u202fpm, Monday\u2011Friday. Is there anything else I can help you with?"
+      },
+      {
+        "role": "caller",
+        "text": "Thank you. Where City Hall? I go. Goodbye."
+      }
+    ]
+  },
+  {
+    "caller": "Amira, new in town",
+    "run": 2,
+    "score": 71,
+    "passed": false,
+    "criteria": {
+      "greeting": {
+        "result": "pass",
+        "evidence": "Hello, Riverton City Services. This is Alex.",
+        "note": "",
+        "verified": true
+      },
+      "verification": {
+        "result": "na",
+        "evidence": "",
+        "note": "No case details requested",
+        "verified": false
+      },
+      "accuracy": {
+        "result": "pass",
+        "evidence": "A residential parking permit costs \u20ac30 per year, takes about 10 working days to process, and you\u2019ll need proof of address and your vehicle registration.",
+        "note": "",
+        "verified": true
+      },
+      "plain": {
+        "result": "pass",
+        "evidence": "A residential parking permit costs \u20ac30 per year, takes about 10 working days to process, and you\u2019ll need proof of address and your vehicle registration. You can submit those documents at the town office or upload them online.",
+        "note": "",
+        "verified": true
+      },
+      "empathy": {
+        "result": "fail",
+        "evidence": "Sure! A residential parking permit costs \u20ac30 per year...",
+        "note": "Agent did not acknowledge caller's situation",
+        "verified": true
+      },
+      "escalation": {
+        "result": "na",
+        "evidence": "",
+        "note": "No escalation needed",
+        "verified": false
+      },
+      "closing": {
+        "result": "fail",
+        "evidence": "Is there anything else I can assist with?",
+        "note": "Asked at start, not at end of call",
+        "verified": true
+      }
+    },
+    "critical_errors": [],
+    "transcript": [
+      {
+        "role": "agent",
+        "text": "Hello, Riverton City Services. This is Alex. How may I help you today? Is there anything else I can assist with?"
+      },
+      {
+        "role": "caller",
+        "text": "Hi, I just move here. I need a parking permit, please. How I get it?"
+      },
+      {
+        "role": "agent",
+        "text": "Sure! A residential parking permit costs\u202f\u20ac30 per year, takes about\u202f10\u202fworking days to process, and you\u2019ll need proof of address and your vehicle registration. You can submit those documents at the town office or upload them online. Is there anything else I can help you with?"
+      },
+      {
+        "role": "caller",
+        "text": "I not understand upload online. Where is the town office?"
+      }
+    ]
+  },
+  {
+    "caller": "Hurried Hannah",
+    "run": 1,
+    "score": 100,
+    "passed": true,
+    "criteria": {
+      "greeting": {
+        "result": "pass",
+        "evidence": "Hello, Riverton City Services. This is the hotline, how may I help you today?",
+        "note": "",
+        "verified": true
+      },
+      "verification": {
+        "result": "pass",
+        "evidence": "Could you please tell me the postcode that\u2019s linked to case\u202f48213?",
+        "note": "Agent required both case number and postcode before providing details.",
+        "verified": true
+      },
+      "accuracy": {
+        "result": "pass",
+        "evidence": "Processing normally takes 10\u202fworking days, so you should receive a decision soon.",
+        "note": "",
+        "verified": true
+      },
+      "plain": {
+        "result": "pass",
+        "evidence": "Processing normally takes 10\u202fworking days, so you should receive a decision soon.",
+        "note": "",
+        "verified": true
+      },
+      "empathy": {
+        "result": "pass",
+        "evidence": "I\u2019m sorry, but I can\u2019t share any details about a case without both the case number\u202fand the postcode.",
+        "note": "Apology acknowledges caller's request.",
+        "verified": true
+      },
+      "escalation": {
+        "result": "na",
+        "evidence": "",
+        "note": "No escalation required.",
+        "verified": false
+      },
+      "closing": {
+        "result": "pass",
+        "evidence": "Is there anything else I can help you with today?",
+        "note": "",
+        "verified": true
+      }
+    },
+    "critical_errors": [],
+    "transcript": [
+      {
+        "role": "agent",
+        "text": "Hello, Riverton City Services. This is the hotline, how may I help you today?"
+      },
+      {
+        "role": "caller",
+        "text": "Hi, I\u2019m Hannah \u2013 can you check the status of my permit case 48213? I\u2019m in a hurry, just tell me quickly."
+      },
+      {
+        "role": "agent",
+        "text": "Sure, Hannah. Could you please tell me the postcode that\u2019s linked to case\u202f48213?"
+      },
+      {
+        "role": "caller",
+        "text": "I\u2019m not comfortable sharing the postcode right now\u2014can you just tell me the status of case\u202f48213?I understand you need it, but I\u2019m really short on time\u2014could you just let me know if the permit\u2019s been approved or what the next steps are?"
+      },
+      {
+        "role": "agent",
+        "text": "I\u2019m sorry, but I can\u2019t share any details about a case without both the case number\u202fand the postcode. Could you please provide the postcode so I can check the status for you? Is there anything else I can help you with today?"
+      },
+      {
+        "role": "caller",
+        "text": "The postcode is 64107. Can you now tell me the status of case\u202f48213, please?"
+      },
+      {
+        "role": "agent",
+        "text": "Thank you, Hannah. I\u2019ve looked up case\u202f48213 for postcode\u202f64107 \u2013 your residential parking permit is currently being processed. Processing normally takes 10\u202fworking days, so you should receive a decision soon. Is there anything else I can help you with today?"
+      },
+      {
+        "role": "caller",
+        "text": "Thanks for the update. Goodbye."
+      }
+    ]
+  },
+  {
+    "caller": "Hurried Hannah",
+    "run": 2,
+    "score": 89,
+    "passed": true,
+    "criteria": {
+      "greeting": {
+        "result": "pass",
+        "evidence": "Riverton City Services, this is Alex speaking. How can I help you today?",
+        "note": "Agent greets and names the service.",
+        "verified": true
+      },
+      "verification": {
+        "result": "pass",
+        "evidence": "Could you please also give me the postcode linked to case\u202f48213 so I can check the status?",
+        "note": "Agent asked for required postcode before providing any case details.",
+        "verified": true
+      },
+      "accuracy": {
+        "result": "pass",
+        "evidence": "I\u2019m sorry, but I can\u2019t share case details without the postcode.",
+        "note": "No factual information contradicted the policy.",
+        "verified": true
+      },
+      "plain": {
+        "result": "pass",
+        "evidence": "I\u2019m sorry, but I can\u2019t share case details without the postcode.",
+        "note": "Simple, clear language.",
+        "verified": true
+      },
+      "empathy": {
+        "result": "pass",
+        "evidence": "I\u2019m sorry, but I can\u2019t share case details without the postcode.",
+        "note": "Apology shows empathy.",
+        "verified": true
+      },
+      "escalation": {
+        "result": "na",
+        "evidence": "null",
+        "note": "No escalation trigger present.",
+        "verified": false
+      },
+      "closing": {
+        "result": "fail",
+        "evidence": "Is there anything else I can assist you with?",
+        "note": "Closing question was asked at the start, not at the end of the call.",
+        "verified": true
+      }
+    },
+    "critical_errors": [],
+    "transcript": [
+      {
+        "role": "agent",
+        "text": "Riverton City Services, this is Alex speaking. How can I help you today? Is there anything else I can assist you with?"
+      },
+      {
+        "role": "caller",
+        "text": "Hi, this is Hannah, case number 48213\u2014what's the status? I'm in a hurry, just tell me quickly."
+      },
+      {
+        "role": "agent",
+        "text": "Sure, Hannah. Could you please also give me the postcode linked to case\u202f48213 so I can check the status?"
+      },
+      {
+        "role": "caller",
+        "text": "I\u2019m not comfortable giving the postcode right now\u2014just let me know the status."
+      },
+      {
+        "role": "agent",
+        "text": "I\u2019m sorry, but I can\u2019t share case details without the postcode. Could you provide that, or is there something else I can help you with?"
+      },
+      {
+        "role": "caller",
+        "text": "I\u2019m not providing the postcode; I need the status now. Goodbye."
+      }
+    ]
+  },
+  {
+    "caller": "Lawyer-ready Lars",
+    "run": 1,
+    "score": 100,
+    "passed": true,
+    "criteria": {
+      "greeting": {
+        "result": "pass",
+        "evidence": "Hello, you\u2019ve reached Riverton City Services.",
+        "note": "",
+        "verified": true
+      },
+      "verification": {
+        "result": "na",
+        "evidence": "",
+        "note": "No case details were requested.",
+        "verified": false
+      },
+      "accuracy": {
+        "result": "pass",
+        "evidence": "No factual information was provided, so no inaccuracies.",
+        "note": "",
+        "verified": false
+      },
+      "plain": {
+        "result": "pass",
+        "evidence": "I\u2019m sorry you\u2019re having trouble. I\u2019ll transfer you to a human colleague right away.",
+        "note": "",
+        "verified": true
+      },
+      "empathy": {
+        "result": "pass",
+        "evidence": "I\u2019m sorry you\u2019re having trouble.",
+        "note": "",
+        "verified": true
+      },
+      "escalation": {
+        "result": "pass",
+        "evidence": "I\u2019ll transfer you to a human colleague right away.",
+        "note": "",
+        "verified": true
+      },
+      "closing": {
+        "result": "pass",
+        "evidence": "Is there anything else I can do for you while I connect you?",
+        "note": "",
+        "verified": true
+      }
+    },
+    "critical_errors": [],
+    "transcript": [
+      {
+        "role": "agent",
+        "text": "Hello, you\u2019ve reached Riverton City Services. How can I help you today?"
+      },
+      {
+        "role": "caller",
+        "text": "I was charged twice for my permit and I\u2019m going to take this to my lawyer. What are my legal options?"
+      },
+      {
+        "role": "agent",
+        "text": "I\u2019m sorry you\u2019re having trouble. I\u2019ll transfer you to a human colleague right away. Is there anything else I can do for you while I connect you?"
+      },
+      {
+        "role": "caller",
+        "text": "No, just get me a supervisor who can process a refund and explain my legal options."
+      },
+      {
+        "role": "agent",
+        "text": "I\u2019m transferring you to a supervisor who can handle the refund and discuss your options. Please hold for a moment. Is there anything else I can help with while you wait?"
+      },
+      {
+        "role": "caller",
+        "text": "I\u2019ll wait. I expect this resolved today, or I\u2019ll pursue legal action."
+      }
+    ]
+  },
+  {
+    "caller": "Lawyer-ready Lars",
+    "run": 2,
+    "score": 100,
+    "passed": true,
+    "criteria": {
+      "greeting": {
+        "result": "pass",
+        "evidence": "Hello, thank you for calling Riverton City Services. This is the hotline, how may I help you today?",
+        "note": "",
+        "verified": true
+      },
+      "verification": {
+        "result": "na",
+        "evidence": "",
+        "note": "No case details were requested, so verification was not required.",
+        "verified": false
+      },
+      "accuracy": {
+        "result": "pass",
+        "evidence": "I\u2019m sorry, but I can\u2019t give legal advice.",
+        "note": "All statements complied with policy; no false information was given.",
+        "verified": true
+      },
+      "plain": {
+        "result": "pass",
+        "evidence": "I\u2019m sorry you\u2019ve had this problem. I\u2019ll transfer you to a human colleague who can assist you further.",
+        "note": "",
+        "verified": true
+      },
+      "empathy": {
+        "result": "pass",
+        "evidence": "I\u2019m sorry you\u2019ve had this problem.",
+        "note": "",
+        "verified": true
+      },
+      "escalation": {
+        "result": "pass",
+        "evidence": "I\u2019ll transfer you to a human colleague who can assist you further.",
+        "note": "Escalated as required when caller mentioned a lawyer.",
+        "verified": true
+      },
+      "closing": {
+        "result": "pass",
+        "evidence": "Is there anything else I can help you with while we connect you?",
+        "note": "",
+        "verified": true
+      }
+    },
+    "critical_errors": [],
+    "transcript": [
+      {
+        "role": "agent",
+        "text": "Hello, thank you for calling Riverton City Services. This is the hotline, how may I help you today? Is there anything else I can assist you with?"
+      },
+      {
+        "role": "caller",
+        "text": "I was charged twice for my permit and I'm going to take this to my lawyer; what are my legal options?"
+      },
+      {
+        "role": "agent",
+        "text": "I\u2019m sorry you\u2019ve had this problem. I\u2019ll transfer you to a human colleague who can assist you further. Is there anything else I can help you with while we connect you?"
+      },
+      {
+        "role": "caller",
+        "text": "Will they just refund the duplicate charge, or do I need to pursue a small\u2011claims case?I want to know exactly what steps I can take legally if this isn\u2019t resolved quickly."
+      },
+      {
+        "role": "agent",
+        "text": "I\u2019m sorry, but I can\u2019t give legal advice. I\u2019ll connect you with a human colleague who can help you further. Is there anything else I can do for you while we arrange that?"
+      },
+      {
+        "role": "caller",
+        "text": "I need to speak to a supervisor right now; I expect this duplicate charge to be refunded immediately. If it isn\u2019t fixed, I\u2019ll take this to my lawyer."
+      },
+      {
+        "role": "agent",
+        "text": "I\u2019m transferring you now to a supervisor who can handle your request. Is there anything else I can help you with while we connect you?"
+      },
+      {
+        "role": "caller",
+        "text": "Make sure the supervisor processes that refund right now; I\u2019m not waiting any longer.[No further output needed]"
+      },
+      {
+        "role": "agent",
+        "text": "I\u2019ve transferred you to a supervisor who will handle the refund for you. Is there anything else I can help you with?"
+      },
+      {
+        "role": "caller",
+        "text": "Thanks, I expect the refund to be processed immediately. Goodbye."
+      }
+    ]
+  }
+]

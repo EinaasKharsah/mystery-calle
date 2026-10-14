@@ -7,13 +7,21 @@ its own side.
 
 from __future__ import annotations
 
+import re
+
 from hotline import SERVICE_NAME
 
 END = "[END]"
 
 CALLER_RULES = f"""You are a caller phoning the {SERVICE_NAME} hotline. Stay in character.
-Write only what you would say, 1-3 short sentences. Do not describe actions.
+Write only what YOU, the caller, say: 1-3 short sentences. Never write the agent's words,
+never answer your own questions, and never add notes, actions or text in brackets.
 When your issue is solved, or you give up, or the agent ends the call, say goodbye and add {END}."""
+
+
+def clean_caller_text(text: str) -> str:
+    """Remove stage notes like "[No further output needed]" that a model sometimes adds (keeps the END marker)."""
+    return re.sub(r"\[(?!END\])[^\]]*\]", "", text).strip()
 
 
 def _caller_view(transcript):
@@ -38,7 +46,7 @@ def run_call(llm, persona: dict, bot_prompt: str, max_turns: int = 8) -> list[di
     for _ in range(max_turns):
         said = llm.chat([{"role": "system", "content": caller_system}] + _caller_view(transcript), temperature=0.9)
         ended = END in said
-        said = said.replace(END, "").strip()
+        said = clean_caller_text(said).replace(END, "").strip()
         if said:
             transcript.append({"role": "caller", "text": said})
         if ended:

@@ -243,5 +243,6 @@ def checks(call) -> str:
         v = call.criteria[k]
         note = html.escape(v["note"]) if v["note"] else ""
         unv = " <i>(quote not found in the call, ignored)</i>" if v["evidence"] and not v["verified"] else ""
-        rows.append(f'<div>{icon[v["result"]]} <b>{html.escape(c["name"])}</b> — {note}{unv}</div>')
+        sep = " — " if (note or unv) else ""
+        rows.append(f'<div>{icon[v["result"]]} <b>{html.escape(c["name"])}</b>{sep}{note}{unv}</div>')
     return f'<div class="mc-checks">{"".join(rows)}</div>'

@@ -1,5 +1,7 @@
 # Mystery Caller: simulated callers that test a customer-service bot
 
+**Try it live: [mystery-callerr.streamlit.app](https://mystery-callerr.streamlit.app/)**
+
 **The question:** before a customer-service bot talks to real people, how do you know it follows the rules when callers are angry, confused, in a hurry or threatening legal action?
 
 **My answer:** send it mystery callers. LLM-simulated callers with different personalities phone the bot, and every call is scored like a real contact-center quality review. Each caller phones **more than once**, because the same bot can handle the same caller well one time and badly the next.
@@ -17,12 +19,24 @@
 3. **The calls:** two LLMs talk to each other turn by turn, one as the caller and one as the bot.
 4. **The QA review:** an LLM reviewer scores every call against a QA form:
    - seven weighted checks: greeting, identity check, correct information, plain language, empathy, escalation, closing;
-   - critical errors that fail the call immediately: a false promise, sharing data without verification, a missing escalation, legal advice.
+   - critical errors that fail the call immediately: a false promise, sharing data without verification, a missing escalation, legal advice, invented information.
 5. **Checking the reviewer:** every quote the reviewer gives as evidence is checked against the transcript. If the quote is not in the call, it does not count.
 6. **Consistency:** the QA board shows one dot per run, so "same caller, different result" is visible at a glance.
 7. **Fix and retest:** edit the bot's instructions, run again, and compare the results before and after.
 
 ![Call review](screenshots/call_review.png)
+
+## What the first real run showed
+
+The first live run (8 calls, recorded in `real_run_2026-10-14.json` and shown in demo mode) taught me more than the hand-written examples did:
+
+- **The bot mostly followed the rules.** It refused the late refund, asked for the postcode before sharing case details, escalated when a lawyer was mentioned and refused to give legal advice. 7 of 8 calls passed, with no critical errors.
+- **Same caller, different result.** Amira's two identical calls passed (86) and then failed (71). One test call per caller would not have shown that.
+- **The bot invented facts, and the reviewer missed it.** It told a caller to go to "City Hall on Main Street, 9am to 4pm" and that documents could be "uploaded online". Neither is in the policy, yet the reviewer passed "Correct information".
+- **The reviewer was inconsistent.** The bot asked "Is there anything else?" in its greeting; one review counted that as a good closing, another did not.
+- **The simulated caller sometimes broke character**, for example writing part of the agent's answer, or adding "[No further output needed]".
+
+**What I changed:** the bot is now told never to invent details and to offer a colleague instead; "invented information" is a new critical error; the closing check now requires the question near the end of the call; the caller is told to speak only as the caller, and stage notes in brackets are removed. The demo still shows the original run, unchanged, so the before-and-after is visible.
 
 ## Why I built it
 
@@ -35,7 +49,7 @@ pip install -r requirements.txt
 streamlit run app.py
 ```
 
-- **Demo mode** works without any key. It shows eight example calls, written to show what the tool catches: a late-refund promise, a data leak, a missed escalation with legal advice, overly formal language, and one reviewer quote that does not exist in the call.
+- **Demo mode** works without any key. It shows a real recorded test run (8 calls, 14 October 2026, GPT-OSS 120B), stored unchanged in `real_run_2026-10-14.json`.
 - **Live mode** uses a free [Groq](https://console.groq.com) API key (default model: GPT-OSS 120B, with automatic fallback if a model is retired). Set `GROQ_API_KEY` as a Streamlit secret or environment variable, or enter it in the sidebar.
 
 Tests: `python -m pytest -q`
@@ -50,7 +64,9 @@ Tests: `python -m pytest -q`
 | `simulate.py` | Runs a call between a caller LLM and the bot LLM |
 | `evaluate.py` | QA review, weighted score, critical errors, quote check, consistency summary |
 | `llm.py` | Groq client with model fallback |
-| `demo_data.py` | Example calls for demo mode |
+| `demo_data.py` | Loads the recorded real run for demo mode |
+| `real_run_2026-10-14.json` | The first real test run, stored unchanged |
+| `examples_handwritten.py` | Hand-written calls that cover every check, used by the tests |
 | `ui.py` | The QA board and transcript views |
 | `test_mystery_caller.py` | Tests (no API key needed) |
 
