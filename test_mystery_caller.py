@@ -100,3 +100,22 @@ def test_llm_falls_back_when_model_is_retired(monkeypatch):
 
 def test_parse_json_handles_extra_text():
     assert parse_json('Here you go: {"a": 1} thanks') == {"a": 1}
+
+
+def test_llm_waits_and_retries_on_rate_limit(monkeypatch):
+    import llm as llm_mod
+
+    class Resp:
+        def __init__(self, code):
+            self.status_code = code
+            self.headers = {}
+            self.text = "Rate limit reached. Please try again in 4.17s." if code == 429 else ""
+        def json(self):
+            return {"choices": [{"message": {"content": "ok"}}]}
+
+    codes = iter([429, 429, 200])
+    slept = []
+    monkeypatch.setattr(llm_mod.requests, "post", lambda url, json, timeout, headers: Resp(next(codes)))
+    monkeypatch.setattr(llm_mod.time, "sleep", lambda s: slept.append(s))
+    assert LLM("k").chat([{"role": "user", "content": "x"}]) == "ok"
+    assert slept == [4.67, 4.67]
